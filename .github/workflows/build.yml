@@ -16,8 +16,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 16, 17, 18 ]
-        os: [ ubuntu-latest, windows-latest ]
+        node-version: [ 18 ]
+        os: [ ubuntu-latest ]
 
     steps:
     - uses: actions/checkout@v3
@@ -28,6 +28,11 @@ jobs:
         source "$NVM_DIR/nvm.sh"
         nvm install ${{ matrix.node-version }}
         nvm install-latest-npm
+    - name: Get version from package.json
+      run: |
+        VERSION=$(node -p "require('./package.json').version")
+        echo "The version is $VERSION"
+        echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV        
     - name: Run npm install --build-from-source
       run: npm install --build-from-source
     - run: npm test
@@ -38,3 +43,8 @@ jobs:
     - name: Publish Windows binaries
       if: ${{ contains(github.event.commits[0].message, '[publish binary]') && github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.os == 'windows-latest' }}
       run: cmd /c 'node_modules\.bin\node-pre-gyp package
+    - name: Upload Release Directory
+      uses: actions/upload-artifact@v3
+      with:
+        name: tulind-release-directory  # Name of the artifact
+        path: build/stage/tulind/$PACKAGE_VERSION/Release/  # Path to the directory      
