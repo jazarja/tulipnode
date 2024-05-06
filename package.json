@@ -34,6 +34,7 @@
     },
     "scripts": {
         "install": "node-pre-gyp install --fallback-to-build",
+        "package": "node-pre-gyp package",
         "test": "node test.js"
     },
     "binary": {
