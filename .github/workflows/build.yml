@@ -30,6 +30,7 @@ jobs:
         nvm install-latest-npm
     - name: Run npm install --build-from-source
       run: npm install --build-from-source
+    - run: npm package
     - run: npm test
     - run: node example.js
     - name: Publish binaries
