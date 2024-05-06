@@ -46,5 +46,5 @@ jobs:
     - name: Upload Release Directory
       uses: actions/upload-artifact@v3
       with:
-        name: tulind-release-directory  # Name of the artifact
-        path: build/stage/tulind/$PACKAGE_VERSION/Release/  # Path to the directory      
+        name: tulind-release-directory-${{ env.PACKAGE_VERSION }}
+        path: build/stage/tulind/v${{ env.PACKAGE_VERSION }}/Release/  
