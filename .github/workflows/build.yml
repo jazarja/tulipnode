@@ -20,6 +20,9 @@ jobs:
         os: [ ubuntu-latest ]
 
     steps:
+    - name: Set env to dev
+      run: |
+        echo "NODE_PRE_GYP_GITHUB_TOKEN =${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN  }}" >> $GITHUB_ENV
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       if: ${{ matrix.os != 'windows-latest' }}
@@ -43,8 +46,6 @@ jobs:
     - name: Publish Windows binaries
       if: ${{ contains(github.event.commits[0].message, '[publish binary]') && github.event_name == 'push' && github.ref == 'refs/heads/master' && matrix.os == 'windows-latest' }}
       run: cmd /c 'node_modules\.bin\node-pre-gyp package
-    - name: Upload Release Directory
-      uses: actions/upload-artifact@v3
-      with:
-        name: tulind-release-directory-${{ env.PACKAGE_VERSION }}
-        path: build/stage/tulind/v${{ env.PACKAGE_VERSION }}/Release/  
+    - run: npm install -g node-pre-gyp-github
+    - run: node-pre-gyp-github publish --release
+
