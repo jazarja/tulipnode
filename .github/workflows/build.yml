@@ -30,6 +30,7 @@ jobs:
         export NVM_DIR="$HOME/.nvm"
         source "$NVM_DIR/nvm.sh"
         nvm install ${{ matrix.node-version }}
+        nvm use ${{ matrix.node-version }}
         nvm install-latest-npm
     - name: Get version from package.json
       run: |
