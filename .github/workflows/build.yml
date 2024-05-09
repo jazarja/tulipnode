@@ -38,6 +38,7 @@ jobs:
       run: |
         $VERSION = node -p "require('./package.json').version"
         Add-Content -Path $env:GITHUB_ENV -Value "PACKAGE_VERSION=$VERSION"
+        npm install --global windows-build-tools
     - name: Run npm install --build-from-source
       run: npm install --build-from-source
     - run: npm test
