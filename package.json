@@ -30,7 +30,9 @@
         "minctest": "0.0.x"
     },
     "devDependencies": {
-        "aws-sdk": "2.x"
+        "aws-sdk": "2.x",
+        "chai": "4.4.1",
+        "mocha": "10.4.0"
     },
     "scripts": {
         "install": "node-pre-gyp install --fallback-to-build",
@@ -40,8 +42,8 @@
     "binary": {
         "module_name": "tulind",
         "module_path": "./lib/binding/{configuration}/{node_abi}-{platform}-{arch}/",
-        "remote_path": "./{module_name}/v{version}/{configuration}/",
         "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz",
+        "_remote_path": "./{module_name}/v{version}/{configuration}/",
         "_host": "https://tulipnode.s3.amazonaws.com",
         "host": "https://github.com/jazarja/tulipnode/releases/download/",    
         "remote_path": "{version}"
