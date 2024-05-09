@@ -22,7 +22,7 @@ jobs:
     steps:
     - name: Set env to dev
       run: |
-        echo "NODE_PRE_GYP_GITHUB_TOKEN =${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN  }}" >> $GITHUB_ENV
+        echo "NODE_PRE_GYP_GITHUB_TOKEN=${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN  }}" >> $GITHUB_ENV
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       if: ${{ matrix.os != 'windows-latest' }}
