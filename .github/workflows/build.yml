@@ -32,6 +32,7 @@ jobs:
         nvm install ${{ matrix.node-version }}
         nvm alias default ${{ matrix.node-version }}
         node -v
+        which node
         nvm install-latest-npm
     - name: Get version from package.json
       run: |
