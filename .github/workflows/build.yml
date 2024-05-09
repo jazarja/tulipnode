@@ -29,10 +29,15 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Get version from package.json
+      if: ${{ matrix.os != 'windows-latest' }}
       run: |
         VERSION=$(node -p "require('./package.json').version")
-        echo "The version is $VERSION"
         echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV        
+    - name: Get version from package.json (Windows)
+      if: ${{ matrix.os == 'windows-latest' }}
+      run: |
+        $VERSION = node -p "require('./package.json').version"
+        Add-Content -Path $env:GITHUB_ENV -Value "PACKAGE_VERSION=$VERSION"
     - name: Run npm install --build-from-source
       run: npm install --build-from-source
     - run: npm test
