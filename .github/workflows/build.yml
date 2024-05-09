@@ -35,6 +35,7 @@ jobs:
         echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV        
     - name: Run npm install --build-from-source
       run: npm install --build-from-source
+    - run: npm i mocha chai --save-dev
     - run: npm test
     - run: node example.js
     - run: npm install -g node-pre-gyp-github
