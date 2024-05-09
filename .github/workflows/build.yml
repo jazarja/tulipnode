@@ -20,27 +20,14 @@ jobs:
         os: [ ubuntu-latest ]
 
     steps:
-    - name: Set env to dev
+    - name: Load Github token
       run: |
         echo "NODE_PRE_GYP_GITHUB_TOKEN=${{ secrets.NODE_PRE_GYP_GITHUB_TOKEN  }}" >> $GITHUB_ENV
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      if: ${{ matrix.os != 'windows-latest' }}
-      run: |
-        export NVM_DIR="$HOME/.nvm"
-        source "$NVM_DIR/nvm.sh"
-        nvm install ${{ matrix.node-version }}
-        nvm alias default ${{ matrix.node-version }}
-        node -v
-        which node
-        nvm install-latest-npm
-    - name: Find Node.js installation path
-      id: find-node
-      run: echo "NODE_PATH=$(which node)" >> $GITHUB_ENV
-    - name: Update PATH to use a specific Node.js version
-      run: |
-        echo "PATH=$NODE_PATH:$PATH" >> $GITHUB_ENV
-        echo "Updated Path: $PATH"      
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
     - name: Get version from package.json
       run: |
         VERSION=$(node -p "require('./package.json').version")
