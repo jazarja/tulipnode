@@ -23,6 +23,10 @@
         "markets"
     ],
     "license": "LGPL-3.0",
+    "devDependencies" : {
+        "mocha": "*",
+        "chai" : "*"
+    },
     "dependencies": {
         "bindings": "^1.5.0",
         "nan": "^2.16.0",
@@ -35,7 +39,7 @@
     "scripts": {
         "install": "node-pre-gyp install --fallback-to-build",
         "package": "node-pre-gyp package",
-        "test": "node test.js"
+        "test": "mocha"
     },
     "binary": {
         "module_name": "tulind",
