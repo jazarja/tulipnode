@@ -23,10 +23,6 @@
         "markets"
     ],
     "license": "LGPL-3.0",
-    "devDependencies" : {
-        "mocha": "*",
-        "chai" : "*"
-    },
     "dependencies": {
         "bindings": "^1.5.0",
         "nan": "^2.16.0",
