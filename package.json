@@ -7,7 +7,7 @@
     "gypfile": true,
     "repository": {
         "type": "git",
-        "url": "git://github.com/jazarja/tulipnode"
+        "url": "https://github.com/jazarja/tulipnode.git"
     },
     "keywords": [
         "tulip",
